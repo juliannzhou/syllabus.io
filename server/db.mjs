@@ -61,8 +61,10 @@ const UserSchema = new mongoose.Schema({
     email: String,
     password: {type: String, unique: true, required: true},
     id: mongoose.Schema.Types.ObjectId,
-    course: { type : Array , "default" : [] }
+    course: mongoose.Schema.Types.Mixed,
+    goals: mongoose.Schema.Types.Mixed 
 });
+
 mongoose.connect(dbconf);
 const User = mongoose.model('User', UserSchema);
 

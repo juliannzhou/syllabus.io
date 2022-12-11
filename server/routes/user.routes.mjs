@@ -30,24 +30,33 @@ var upload = multer({
 });
 // User model
 
-router.post('/user-profile', upload.single('user_syllabus'), (req, res, next) => {
+router.post('/user-profile', upload.single('user_syllabus'), async (req, res, next) => {
     const url = req.protocol + '://' + req.get('host')
     console.log(req.file);
-    const cookies =req.get('Cookie');
-    const arr = cookies.split(';');
-    const email = arr[0].split('=')[1].replace('%40', '@');
+    const email = req.body.email;
+    const courseName = req.body.courseName;
+    const syllabus = url + '/public/' + req.file.filename;
+    console.log(courseName, syllabus, email);
     console.log(email, url + '/public/' + req.file.filename );
-    User.updateOne({"email": email}, {$push: {"course": url + '/public/' + req.file.filename }}).then(result => {
+    const user = await User.findOne({"email": email});
+    const courseDict = user.course;
+    courseDict[courseName]['syllabus'] = syllabus;
+    user.updateOne({'$set': {course: courseDict}}).then(result => {
+        console.log(user.course);
+        user.save();
         res.status(201).json({
             message: "success",
+            course: user.course
         })
-    }).catch(err => {
+      }).catch(err => {
         console.log(err),
             res.status(500).json({
                 error: err
             });
-    })
-})
+      })
+    console.log(user.course);
+});
+
 router.get("/", (req, res, next) => {
     User.find().then(data => {
         res.status(200).json({
