@@ -10,6 +10,9 @@ import Login from './pages/Login';
 import Start from './pages/Start';
 import Dashboard from './pages/Dashboard';
 import Course from './pages/Course';
+import CoursePage from './pages/CoursePage';
+import Schedule from './pages/Schedule';
+import Goals from './pages/Goals';
 
 const Main = () => {
   return (
@@ -21,7 +24,9 @@ const Main = () => {
       <Route exact path='/start' element={<Start/>}></Route>
       <Route exact path='/dashboard' element={<Dashboard/>}></Route>
       <Route exact path='/course' element={<Course/>}></Route>
-
+      <Route exact path='/course-page' element={<CoursePage/>}></Route>
+      <Route exact path='/schedule' element={<Schedule/>}></Route>
+      <Route exact path='/goals' element={<Goals/>}></Route>
     </Routes>
     </BrowserRouter>
   );

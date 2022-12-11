@@ -12,19 +12,19 @@ function Dashboard() {
             <h1 id="title">user dashboard</h1>
             <form>
                 <div>
-                <Link className="btn" to="/Course"> 
+                <Link className="btn" to="/course"> 
                 <input id="Course" class="Course" type="image" src={course}/> 
                 </Link>
                 <h2 className="text-align">course</h2>
                 </div>
                 <div>
-                <Link className="btn" to="/Login"> 
+                <Link className="btn" to="/schedule"> 
                 <input id="Schedule" class="Schedule" type="image" src={schedule}/> 
                 </Link>
                 <h2 className="text-align">schedule</h2>
                 </div>
                 <div>
-                <Link className="btn" to="/Login"> 
+                <Link className="btn" to="/goals"> 
                 <input id="Goals" class="Goals" type="image" src={goals}/>
                 </Link>
                 <h2 className="text-align">goals</h2> 

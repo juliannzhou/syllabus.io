@@ -26,6 +26,7 @@
   }
 
   h2 {
+    align-items: center;
     font-size: 60px;
     font-family:Arial, Helvetica, sans-serif;
     color: #1F5692;
@@ -49,6 +50,38 @@
   #text-align {
     position: relative;
     margin-top: 40%;
+  }
+  #add_course {
+    align-items: center;
+    margin-left: 30%;
+    margin-bottom: 5%;
+  }
+
+  #goal {
+    display: inline;
+    background-color: rgb(255, 254, 254);
+    margin-left: 10px;
+    margin-bottom: 20px;
+  }
+
+  #course {
+    background-color: rgb(255, 254, 254);
+    margin-bottom: 20px;
+  }
+
+  #form1 {
+    display: block;
+    margin-bottom: 20px;
+    margin: 0 auto; 
+  }
+
+  #form3 {
+    display:block;
+    margin: 0 auto;
+  }
+
+  #add-form {
+    margin: 0 auto;  
   }
   
   form {

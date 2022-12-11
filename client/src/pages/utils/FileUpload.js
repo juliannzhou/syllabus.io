@@ -3,6 +3,7 @@ import React from 'react';
 import axios from 'axios';
 import icon from '../../img/upload.svg';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 axios.defaults.withCredentials = true;
 
@@ -17,21 +18,32 @@ axios.defaults.withCredentials = true;
     const inputRef = React.useRef(null);
     
     function handleFile(files) {
-        alert("Number of files: " + files.length);
-        console.log(files);
+        if (files.length !== 1) {
+          alert("Please upload one file only");
+        }
+        else {
+          alert("Upload success");
+          console.log(files);
         console.log(files[0].name);
         const formData = new FormData();
-            
-            formData.append('user_syllabus', files[0]);
-            axios.post("http://localhost:8000/api/user-profile", formData, {
-                headers: {
-                  'Content-Type': 'multipart/form-data'
-                },
-            }).then(res => {
-                if (res['data']['message'] === 'success') {
-                    navigate('/course');
-                }
-            });
+        const cookies = new Cookies();
+        const courseName = cookies.get("courseName");
+        const email = cookies.get("email");
+        formData.append('user_syllabus', files[0]);
+        formData.append('courseName', courseName);
+        formData.append('email', email);
+        axios.post("http://localhost:8000/api/user-profile", formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            },
+        }).then(res => {
+            if (res['data']['message'] === 'success') {
+                navigate('/course');
+            }
+        });
+    }
+    
+        
     
     }
     // handle drag events
@@ -69,7 +81,7 @@ axios.defaults.withCredentials = true;
     };
     
     return (
-      <form id="form-file-upload" onDragEnter={handleDrag} onSubmit={(e) => e.preventDefault()}>
+      <form id="form-file-upload" class="form-file-upload" onDragEnter={handleDrag} onSubmit={(e) => e.preventDefault()}>
         <input className="input1" ref={inputRef} type="file" id="input-file-upload" multiple={true} onChange={handleChange} />
         <label id="label-file-upload" htmlFor="input-file-upload" className={dragActive ? "drag-active" : "" }>
           <div>
